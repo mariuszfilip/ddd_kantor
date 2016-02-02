@@ -1,0 +1,24 @@
+{
+    "name": "zendframework/skeleton-application",
+    "description": "Skeleton Application for ZF2",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.5",
+        "zendframework/zendframework": "~2.5",
+        "mvlabs/zf2behat-extension" : "dev-master",
+        "doctrine/doctrine-orm-module": "*",
+        "phpspec/phpspec": "~2.3.0",
+        "henrikbjorn/phpspec-code-coverage":"~1.0.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Cantor\\": "module/Cantor/src/"
+        }
+    }
+
+}

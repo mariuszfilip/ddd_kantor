@@ -1,0 +1,9 @@
+default:
+  extensions:
+    MvLabs\Zf2Extension\Zf2Extension:
+      module: Cantor
+  formatter:
+    name:               pretty
+    parameters:
+      output_styles:
+        comment: [ black, white, [ underscore ] ]

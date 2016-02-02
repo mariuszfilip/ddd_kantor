@@ -1,0 +1,7 @@
+# zfnew/phpspec.yml
+suites:
+  application_suite:
+    namespace: Cantor
+    src_path: module/Cantor/src/
+    spec_path: module/Cantor
+
