@@ -2,6 +2,7 @@
 namespace Cantor\Features\Context;
 
 
+
 use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
     Behat\Behat\Context\BehatContext,
@@ -10,9 +11,12 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use Cantor\Domain\BankAccount;
 use Cantor\Domain\Client;
+use Cantor\Domain\Country;
 use Cantor\Domain\Email;
 use Cantor\Domain\Name;
+use Cantor\Domain\NumberAccount;
 use MvLabs\Zf2Extension\Context\Zf2AwareContextInterface;
 use Zend\Mvc\Application;
 
@@ -34,7 +38,18 @@ implements Zf2AwareContextInterface
     private $parameters;
 
 
+    /**
+     * @var
+     */
     private $_client;
+    /**
+     * @var
+     */
+    private $_clientRegistered;
+    /**
+     * @var
+     */
+    private $_bankAccount;
 
     /**
     * Initializes context with parameters from behat.yml.
@@ -84,6 +99,42 @@ implements Zf2AwareContextInterface
     public function systemDodajeKlienta()
     {
         $this->_client->register();
+    }
+
+    /**
+     * @Given /^jestem klientem$/
+     */
+    public function jestemKlientem()
+    {
+        $this->_clientRegistered = new Client(new Name('Mariusz','Filipkowski'),new Email('mariusz24245@gmail.com'),$isRegistered = true);
+    }
+
+    /**
+     * @When /^uzpelniam numer konta bankowego ,kraj w systemie$/
+     */
+    public function uzpelniamNumerKontaBankowegoKrajWSystemie()
+    {
+        $this->_bankAccount = new BankAccount(new NumberAccount('89 8762 1022 0035 8000 3000 0010'),new Country('PL'));
+    }
+
+    /**
+     * @Then /^posiadam aktywny numer konta bankowego do wymiany walut$/
+     */
+    public function posiadamAktywnyNumerKontaBankowegoDoWymianyWalut()
+    {
+        $oBankAccount = $this->_clientRegistered->getBankAccount();
+
+        if(!$oBankAccount->isActive()){
+            throw new \Exception('Klient nie posiada aktywnego konta');
+        }
+    }
+
+    /**
+     * @Given /^system przypisuje numer konta bankowego do klienta$/
+     */
+    public function systemPrzypisujeNumerKontaBankowegoDoKlienta()
+    {
+        $this->_clientRegistered->addBankAccount($this->_bankAccount);
     }
 
     /**

@@ -19,6 +19,7 @@ class Client
      * @var bool
      */
     private $_isRegistered = false;
+    private $_bankAccount;
 
     public function __construct(Name $name, Email $email, $isRegistered)
     {
@@ -38,5 +39,15 @@ class Client
     public function register()
     {
         $this->_isRegistered = true;
+    }
+
+    public function addBankAccount(BankAccount $bankAccount)
+    {
+        $this->_bankAccount = $bankAccount;
+    }
+
+    public function getBankAccount()
+    {
+        return $this->_bankAccount;
     }
 }
