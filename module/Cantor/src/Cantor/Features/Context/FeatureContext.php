@@ -39,15 +39,15 @@ implements Zf2AwareContextInterface
 
 
     /**
-     * @var
+     * @var Client
      */
     private $_client;
     /**
-     * @var
+     * @var Client
      */
     private $_clientRegistered;
     /**
-     * @var
+     * @var BankAccount
      */
     private $_bankAccount;
 

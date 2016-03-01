@@ -13,7 +13,8 @@
         "mvlabs/zf2behat-extension" : "dev-master",
         "doctrine/doctrine-orm-module": "*",
         "phpspec/phpspec": "~2.3.0",
-        "henrikbjorn/phpspec-code-coverage":"~1.0.1"
+        "henrikbjorn/phpspec-code-coverage":"~1.0.1",
+        "carlosbuenosvinos/ddd": "1.*"
     },
     "autoload": {
         "psr-0": {

@@ -1,0 +1,27 @@
+specification pattern
+command pattern
+
+event pattern
+
+ignoruj zapis
+
+
+command-query responsibilty segregation
+
+anemic-entity
+
+http://www.slideshare.net/cakper/2014-1018-drupal-camp-domaindriven-desing-in-php-and-symfony
+
+
+
+1. Trzeba podzielic kod na 2 czesci jedna
+command - zapis
+query - odczyt
+
+2. command - jak zwracac info o bledzie
+
+3. Potrzeba trzymania 2 encji ?
+- gdzie takie dane data_dodania ?
+-
+
+
