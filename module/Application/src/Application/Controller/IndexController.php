@@ -11,11 +11,15 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Cantor\Application\Service\Client\SignUpService;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        $client = new SignUpService();
+        $client->execute();
+
         return new ViewModel();
     }
 }
