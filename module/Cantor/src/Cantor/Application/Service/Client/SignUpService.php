@@ -12,6 +12,13 @@ use Ddd\Application\Service\ApplicationService;
 
 class SignUpService implements ApplicationService{
 
+
+    public function __construct()
+    {
+
+        
+    }
+
     /**
      * @param $request
      * @return mixed

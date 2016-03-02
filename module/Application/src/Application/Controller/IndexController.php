@@ -17,6 +17,8 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        
+        
         $client = new SignUpService();
         $client->execute();
 
