@@ -6,11 +6,51 @@
  * Time: 18:44
  */
 
-namespace Cantor\Infastructure\Persistence\Repository;
+namespace Cantor\Infrastructure\Persistence\Repository;
 
 
-class ClientRepositoryDoctrine{
+use Cantor\Domain\Client;
+use Cantor\Domain\Repository\ClientRepository;
+use Doctrine\ORM\EntityManager;
 
-    
+class ClientRepositoryDoctrine implements ClientRepository{
 
+
+    /**
+     * @var EntityManager
+     */
+    private $_entityManager;
+
+    public function __construct(EntityManager $entitymanager)
+    {
+        $this->_entityManager = $entitymanager;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function register(Client $client)
+    {
+        $this->_entityManager->persist($client);
+        $this->_entityManager->flush();
+    }
+
+    /**
+     * @param $email
+     * @return Client
+     */
+    public function byEmail($email)
+    {
+
+        return null;
+    }
+
+    /**
+     * @param $idClient
+     * @return Client
+     */
+    public function byId($idClient)
+    {
+        // TODO: Implement byId() method.
+    }
 }

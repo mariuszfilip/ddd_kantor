@@ -9,19 +9,34 @@
 
 namespace Application\Controller;
 
+use Cantor\Application\Service\Client\ClientRequest;
+use Cantor\Application\Service\Client\SignUpService;
+use Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine;
+use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Cantor\Application\Service\Client\SignUpService;
 
 class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        
-        
-        $client = new SignUpService();
-        $client->execute();
+        try{
+            $oClient = new ClientRequest();
+            $oClient->setEmail('mariusz24245@gmail.com');
+            $oClient->setName('Mariusz');
+            $oClient->setSurname('Filipkowski');
 
+            $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+            $oRepo = new ClientRepositoryDoctrine($em);
+
+            $client = new SignUpService($oRepo);
+            $client->execute($oClient);
+
+        }catch(\Exception $e){
+            
+            var_dump($e->getMessage());
+        }
         return new ViewModel();
+
     }
 }

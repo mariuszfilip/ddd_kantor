@@ -1,31 +1,42 @@
 <?php
 
 namespace Cantor\Domain;
+use Rhumsaa\Uuid\Uuid;
+
 
 class Client
 {
-    /**
-     * @var Name
-     */
-    private $_name;
+
+    protected $_id;
+
+    protected $_name;
 
     /**
      * @var Email
      */
-    private $_email;
+    protected $_email;
 
+
+    protected $_date_add;
 
     /**
      * @var bool
      */
-    private $_isRegistered = false;
-    private $_bankAccount;
+    protected $_isRegistered = false;
+
+
+    protected $_bankAccount;
+
+    protected $_surname;
 
     public function __construct(Name $name, Email $email, $isRegistered)
     {
-        $this->_name = $name;
-        $this->_email = $email;
+        $this->_id = Uuid::uuid4()->toString();
+        $this->_name = $name->getName();
+        $this->_surname = $name->getSurname();
+        $this->_email = $email->getEmail();
         $this->_isRegistered = $isRegistered;
+        $this->_date_add = date('y-m-d H:i:s');
     }
 
     /**
@@ -50,4 +61,5 @@ class Client
     {
         return $this->_bankAccount;
     }
+
 }

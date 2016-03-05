@@ -30,10 +30,6 @@ return array(
         ),
     ),
     'doctrine' => array(
-        'configuration' => array(
-            'orm_default' => array(
-            ),
-        ),
         'driver' => array(
             'cargo_backend_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
@@ -44,7 +40,7 @@ return array(
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'Pozyczka' => 'cargo_backend_driver',
+                    'Cantor\Domain' => 'cargo_backend_driver',
                 )
             )
         )

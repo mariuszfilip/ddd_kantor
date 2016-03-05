@@ -4,9 +4,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="Cantor\Domain\Client"
-            table="cargo"
-            repository-class="Cantor\Infrastructure\Persistence\Doctrine\ClientRepositoryDoctrine">
-        <id name="id" type="int" column="id" />
-
+            table="client"
+            repository-class="Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine">
+        <id name="_id" type="string" column="id_client" />
+        <id name="_name" type="string" column="name"  />
+        <id name="_surname" type="string" column="surname"  />
+        <id name="_email" type="string" column="email"  />
     </entity>
 </doctrine-mapping>

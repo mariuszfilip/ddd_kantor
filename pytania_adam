@@ -1,3 +1,4 @@
 1. Czy rejestracje klienta powinna nalezec do domeny ? Wydaje mi sie ze nie
 2. Gdzie powinny byc zapisywane takie dane jak data_dodania ? Czy to jest element domeny?
-3.
+3. Czy client w tym przypadu powinien byc aggregatem albo servicem ?
+4. Czy mozna jakos wyciagnac kolejny id doctrine ? czy to musi by uuid (string)?
