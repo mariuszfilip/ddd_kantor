@@ -4,6 +4,7 @@ namespace spec\Cantor\Domain;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Cantor\Domain\Exception\NameNotCorrectException;
 
 class NameSpec extends ObjectBehavior
 {
@@ -26,9 +27,11 @@ class NameSpec extends ObjectBehavior
         $this->getSurname()->shouldBeString();
     }
 
-    function it_is_throw_if_name_or_surname_is_not_correct(){
-
+    function it_is_throw_if_name_or_surname_is_short_then_2_letters(){
+        $this->shouldThrow(new NameNotCorrectException())->during('__construct',array('M','atest'));
+        $this->shouldThrow(new NameNotCorrectException())->during('__construct',array('Ma','a'));
     }
+
 
 
 }

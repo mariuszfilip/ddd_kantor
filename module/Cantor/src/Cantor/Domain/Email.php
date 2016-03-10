@@ -1,6 +1,7 @@
 <?php
 
 namespace Cantor\Domain;
+use Cantor\Domain\Exception\EmailNotCorrectException;
 
 class Email
 {
@@ -8,6 +9,9 @@ class Email
 
     public function __construct($email)
     {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            throw new EmailNotCorrectException();
+        }
         $this->_email = $email;
     }
 

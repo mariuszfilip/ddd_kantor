@@ -1,7 +1,7 @@
 <?php
 
 namespace Cantor\Domain;
-
+use Cantor\Domain\Exception\NameNotCorrectException;
 class Name
 {
     private $_name;
@@ -10,6 +10,12 @@ class Name
 
     public function __construct($name, $surname)
     {
+        if(strlen($name) < 2){
+            throw new NameNotCorrectException();
+        }
+        if(strlen($surname) < 2){
+            throw new NameNotCorrectException();
+        }
         $this->_name = $name;
         $this->_surname = $surname;
     }
