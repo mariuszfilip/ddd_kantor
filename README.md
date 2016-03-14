@@ -11,4 +11,8 @@ Warstwa domeny nie powinna byc swiadomo detali technicznych takich jak persysten
 
 
 
-DDD to event source , bdd , 
+DDD to event source , bdd ,
+
+
+Problem powstaje przy implementacji aggregatu. Jedna z operacji w agregacji jest uruchomienie metody repozystorium.
+Niestety zeby to zrobic trzeba miec implementacje tego obiektu.

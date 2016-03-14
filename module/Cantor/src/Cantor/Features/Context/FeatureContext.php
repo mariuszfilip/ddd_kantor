@@ -11,12 +11,14 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use Cantor\Domain\Aggregate\Account;
 use Cantor\Domain\BankAccount;
 use Cantor\Domain\Client;
-use Cantor\Domain\Country;
+use Cantor\Domain\Currency;
 use Cantor\Domain\Email;
 use Cantor\Domain\Name;
 use Cantor\Domain\NumberAccount;
+use Cantor\Domain\Repository\AccountRepository;
 use MvLabs\Zf2Extension\Context\Zf2AwareContextInterface;
 use Zend\Mvc\Application;
 
@@ -110,32 +112,22 @@ implements Zf2AwareContextInterface
     }
 
     /**
-     * @When /^uzpelniam numer konta bankowego ,kraj w systemie$/
+     * @When /^uzpelniam numer konta bankowego ,walute konta$/
      */
-    public function uzpelniamNumerKontaBankowegoKrajWSystemie()
+    public function uzpelniamNumerKontaBankowegoWaluteKonta()
     {
-        $this->_bankAccount = new BankAccount(new NumberAccount('89 8762 1022 0035 8000 3000 0010'),new Country('PL'));
+        $this->_bankAccount = new BankAccount(new NumberAccount('89 8762 1022 0035 8000 3000 0010'),new Currency('PLN'));
     }
 
     /**
-     * @Then /^posiadam aktywny numer konta bankowego do wymiany walut$/
-     */
-    public function posiadamAktywnyNumerKontaBankowegoDoWymianyWalut()
-    {
-        $oBankAccount = $this->_clientRegistered->getBankAccount();
-
-        if(!$oBankAccount->isActive()){
-            throw new \Exception('Klient nie posiada aktywnego konta');
-        }
-    }
-
-    /**
-     * @Given /^system przypisuje numer konta bankowego do klienta$/
+     * @Then /^system przypisuje numer konta bankowego do klienta$/
      */
     public function systemPrzypisujeNumerKontaBankowegoDoKlienta()
     {
-        $this->_clientRegistered->addBankAccount($this->_bankAccount);
+        //$oAggregate = new Account(new AccountRepository());
+        //$oAggregate->add($this->_clientRegistered,$this->_bankAccount);
     }
+
 
     /**
      *  kim jest klientem ?

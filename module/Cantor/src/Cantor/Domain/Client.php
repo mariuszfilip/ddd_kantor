@@ -52,14 +52,12 @@ class Client
         $this->_isRegistered = true;
     }
 
-    public function addBankAccount(BankAccount $bankAccount)
+    /**
+     * @return string
+     */
+    public function getId()
     {
-        $this->_bankAccount = $bankAccount;
+        return $this->_id;
     }
-
-    public function getBankAccount()
-    {
-        return $this->_bankAccount;
-    }
-
+    
 }
