@@ -38,4 +38,9 @@ class ClientSpec extends ObjectBehavior
         $this->register();
         $this->isRegistered()->shouldReturn(true);
     }
+
+    function it_is_add_bank_account(BankAccount $bankAccount){
+
+        $this->addBankAccount($bankAccount->getWrappedObject());
+    }
 }

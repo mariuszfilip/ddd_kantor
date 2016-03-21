@@ -1,4 +1,6 @@
-Feature: jako nowy klient mam mozliwosc zarejestrowania sie w portalu
+Feature: rejestracja klienta
+  aby miec wszystkie dostepne funkcjonalnosci
+  jako nowy klient mam mozliwosc zarejestrowania sie w portalu
 
 
  Scenario:

@@ -1,6 +1,7 @@
 <?php
 
 namespace Cantor\Domain;
+use Doctrine\Common\Collections\ArrayCollection;
 use Rhumsaa\Uuid\Uuid;
 
 
@@ -37,6 +38,7 @@ class Client
         $this->_email = $email->getEmail();
         $this->_isRegistered = $isRegistered;
         $this->_date_add = date('y-m-d H:i:s');
+        $this->_bankAccount = new ArrayCollection();
     }
 
     /**
@@ -58,6 +60,11 @@ class Client
     public function getId()
     {
         return $this->_id;
+    }
+
+    public function addBankAccount(BankAccount $bankAccount)
+    {
+        $this->_bankAccount->add($bankAccount);
     }
     
 }

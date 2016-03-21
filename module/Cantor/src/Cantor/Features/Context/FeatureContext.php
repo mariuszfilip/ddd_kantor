@@ -12,10 +12,13 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
 use Cantor\Domain\Aggregate\Account;
+use Cantor\Domain\Amount;
 use Cantor\Domain\BankAccount;
 use Cantor\Domain\Client;
 use Cantor\Domain\Currency;
 use Cantor\Domain\Email;
+use Cantor\Domain\ExchangeRate;
+use Cantor\Domain\ExchangeSummary;
 use Cantor\Domain\Name;
 use Cantor\Domain\NumberAccount;
 use Cantor\Domain\Repository\AccountRepository;
@@ -52,6 +55,27 @@ implements Zf2AwareContextInterface
      * @var BankAccount
      */
     private $_bankAccount;
+    /**
+     * @var Currency
+     */
+    private $_currencyTrasaction;
+
+    /**
+     * @var int
+     */
+    private $_quantity;
+
+    /**
+     * @var BankAccount
+     */
+    private $_bankAccountTransactionSource;
+
+    /**
+     * @var BankAccount
+     */
+    private $_bankAccountTransactionTarget;
+    private $exchangeRate;
+    private $exchangeRateSummary;
 
     /**
     * Initializes context with parameters from behat.yml.
@@ -124,14 +148,68 @@ implements Zf2AwareContextInterface
      */
     public function systemPrzypisujeNumerKontaBankowegoDoKlienta()
     {
-        //$oAggregate = new Account(new AccountRepository());
-        //$oAggregate->add($this->_clientRegistered,$this->_bankAccount);
+        $this->_clientRegistered->addBankAccount($this->_bankAccount);
     }
 
+    /**
+     * @When /^wybieram walute ktora chce kupic$/
+     */
+    public function wybieramWaluteKtoraChceKupic()
+    {
+        $this->_currencyTrasaction = new Currency('EUR');
+    }
 
     /**
-     *  kim jest klientem ?
-     *  co moze zrobic kantor? zarejestrowac klienta
-     *
+     * @Given /^wybieram wolumen waluty$/
      */
+    public function wybieramWolumenWaluty()
+    {
+        $this->_quantity = 10;
+    }
+
+    /**
+     * @Given /^wybieram konto z ktorego przelewam pln$/
+     */
+    public function wybieramKontoZKtoregoPrzelewamPln()
+    {
+        $this->_bankAccountTransactionSource = new BankAccount(new NumberAccount('89 8762 1022 0035 8000 3000 0010'),new Currency('PLN'));
+    }
+
+    /**
+     * @Given /^wybieram numer konta na ktory ma byc przelew zwrotny$/
+     */
+    public function wybieramNumerKontaNaKtoryMaBycPrzelewZwrotny()
+    {
+        $this->_bankAccountTransactionTarget = new BankAccount(new NumberAccount('89 8762 1022 0035 8000 3000 0010'),new Currency('EUR'));
+    }
+
+    /**
+     * @Then /^potwierdzam zlecenie$/
+     */
+    public function potwierdzamZlecenie()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^wyswietla mi sie podsumowanie zlecenia$/
+     */
+    public function wyswietlaMiSiePodsumowanieZlecenia()
+    {
+        $this->exchangeRateSummary = new ExchangeSummary($this->exchangeRate,$this->_quantity);
+
+        assert(3.50*$this->_quantity == $this->exchangeRateSummary->getAmountSummary(),'podsumowanie nie jest zgodne z oczekiwanym');
+    }
+
+    /**
+     * @Then /^wyswietla mi sie kurs$/
+     */
+    public function wyswietlaMiSieKurs(){
+
+        $this->exchangeRate = new ExchangeRate(new Currency('EUR'),new Amount(3.50));
+
+        assert(3.50==$this->exchangeRate->getCourse(),'kurs nie jest zgodny z oczekiwanym');
+
+    }
+    
 }
