@@ -9,15 +9,20 @@
 
 namespace Application\Controller;
 
-use Cantor\Application\Service\Client\ClientRequest;
-use Cantor\Application\Service\Client\SignUpService;
+use Cantor\Application\Cqrs\Payload\ClientRequest;
+use Cantor\Application\Cqrs\Command\SignUpCommand;
 use Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine;
-use Doctrine\ORM\EntityManager;
+use Malocher\Cqrs\Gate;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var Gate
+     */
+    private $_commandBus;
+
     public function indexAction()
     {
         try{
@@ -29,7 +34,7 @@ class IndexController extends AbstractActionController
             $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
             $oRepo = new ClientRepositoryDoctrine($em);
 
-            $client = new SignUpService($oRepo);
+            $client = new SignUpCommand($oRepo);
             $client->execute($oClient);
 
         }catch(\Exception $e){
@@ -37,6 +42,12 @@ class IndexController extends AbstractActionController
             var_dump($e->getMessage());
         }
         return new ViewModel();
+
+    }
+
+    public function setGate(Gate $get)
+    {
+        $this->_commandBus = $get;
 
     }
 }

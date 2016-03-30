@@ -54,6 +54,11 @@ return array(
             ),
         ),
     ),
+    'controllers' => array(
+        'factories'=> array(
+            'Application\Controller\Index' => 'Application\Controller\Service\IndexControllerFactory'
+        )
+    ),
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -71,11 +76,6 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
@@ -100,5 +100,56 @@ return array(
             'routes' => array(
             ),
         ),
+    ),
+    /*
+* You can use the full set of configuration options provided by malocher/cqrs-esb
+* {@see https://github.com/malocher/cqrs-esb/tree/master/iterations/Iteration}
+*
+* Put everything under the key cqrs.
+* The malocher/zf2-cqrs-module pass the configuration to Malocher\Cqrs\Configuration\Setup,
+* first time you request the malocher.cqrs.gate from the service manager.
+*/
+    'cqrs' => array(
+        /*
+         * We use only one bus in this example and set it as default, so we can
+         * call $malocherCqrsGate->getBus() without the need to tell the gate wich bus we want to get.
+         *
+         * You could also have multiple buses, f.e. an extra error bus, a frontend bus,
+         * or a bus for each domain (if you have more than one)
+         */
+        'default_bus' => 'domain-bus',
+        'adapters' => array(
+            /**
+             * CQRS Adapters help you to setup your system.
+             * We use the ArrayMapAdapter here. It is a very simple Adapter.
+             * We have to map comands, queries and events to handlers and listeners
+             * by hand.
+             *
+             * There are other adapters available, f.e. an AnnotationAdapter or an Adapter
+             * that works with coneventions to do the mapping.
+             */
+            'Malocher\Cqrs\Adapter\ArrayMapAdapter' => array(
+                'buses' => array(
+                    /*
+                     * Register all commands, queries and events on the DomainBus
+                     */
+                    'Cantor\Application\Cqrs\Bus\DomainBus' => array(
+                        /*
+                         * Each Adapter has it's own configuration structure.
+                         * The ArrayMapAdapter needs complete mapping information
+                         * for each cqrs message (command, query, event)
+                         */
+                        'Cantor\Application\Cqrs\Command\SignUpCommand' => array(
+                            /*
+                             * The alias of a handler or listener should match to
+                             * an alias used within the service manager.
+                             */
+                            'alias' => 'signup_command_handler',
+                            'method' => 'execute'
+                        ),
+                    )
+                )
+            )
+        )
     ),
 );

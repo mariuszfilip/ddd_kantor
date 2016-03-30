@@ -6,7 +6,7 @@
  * Time: 18:30
  */
 
-namespace Cantor\Application\Service\Client;
+namespace Cantor\Application\Cqrs\Command;
 
 
 use Cantor\Domain\Client;
@@ -16,7 +16,7 @@ use Cantor\Domain\Name;
 use Cantor\Domain\Repository\ClientRepository;
 use Ddd\Application\Service\ApplicationService;
 
-class SignUpService implements ApplicationService{
+class SignUpCommand implements ApplicationService{
 
 
     /**

@@ -6,7 +6,7 @@
  * Time: 12:22
  */
 
-namespace Cantor\Application\Service\Client;
+namespace Cantor\Application\Cqrs\Payload;
 
 
 class ClientRequest{
