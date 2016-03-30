@@ -15,7 +15,8 @@
         "phpspec/phpspec": "~2.3.0",
         "henrikbjorn/phpspec-code-coverage":"~1.0.1",
         "carlosbuenosvinos/ddd": "1.*",
-        "rhumsaa/uuid": "~2.7.1"
+        "rhumsaa/uuid": "~2.7.1",
+        "malocher/zf2-cqrs-module" : "dev-master"
     },
     "autoload": {
         "psr-0": {

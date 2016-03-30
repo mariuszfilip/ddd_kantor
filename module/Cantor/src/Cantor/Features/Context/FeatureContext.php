@@ -184,14 +184,6 @@ implements Zf2AwareContextInterface
     }
 
     /**
-     * @Then /^potwierdzam zlecenie$/
-     */
-    public function potwierdzamZlecenie()
-    {
-        throw new PendingException();
-    }
-
-    /**
      * @Given /^wyswietla mi sie podsumowanie zlecenia$/
      */
     public function wyswietlaMiSiePodsumowanieZlecenia()
@@ -210,6 +202,14 @@ implements Zf2AwareContextInterface
 
         assert(3.50==$this->exchangeRate->getCourse(),'kurs nie jest zgodny z oczekiwanym');
 
+    }
+
+    /**
+     * @Then /^potwierdzam zlecenie$/
+     */
+    public function potwierdzamZlecenie()
+    {
+        throw new PendingException();
     }
     
 }
