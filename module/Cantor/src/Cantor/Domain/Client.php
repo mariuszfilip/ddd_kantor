@@ -37,7 +37,7 @@ class Client
         $this->_surname = $name->getSurname();
         $this->_email = $email->getEmail();
         $this->_isRegistered = $isRegistered;
-        $this->_date_add = date('y-m-d H:i:s');
+        $this->_date_add = new \DateTime("now");
         $this->_bankAccount = new ArrayCollection();
     }
 

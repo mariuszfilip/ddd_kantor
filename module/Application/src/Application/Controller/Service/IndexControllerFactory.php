@@ -30,10 +30,6 @@ class IndexControllerFactory implements FactoryInterface{
              * @param ServiceLocatorInterface $parentLocator
              */
             $parentLocator = $serviceLocator->getServiceLocator();
-            if($parentLocator->has('malocher.cqrs.gate')){
-                $parentLocator->get('malocher.cqrs.gate');
-                echo 'test';
-            }
             $c->setGate($parentLocator->get('malocher.cqrs.gate'));
             return $c;
         }catch (\Exception $e){

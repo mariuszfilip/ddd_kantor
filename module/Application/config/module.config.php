@@ -9,6 +9,9 @@
 
 namespace Application;
 
+use Cantor\Infrastructure\Persistence\Repository\AccountRepositoryDoctrine;
+use Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine;
+
 return array(
     'router' => array(
         'routes' => array(
@@ -66,6 +69,21 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+            'signup_command_handler' => function($sm){
+                $em = $sm->get('doctrine.entitymanager.orm_default');
+                $oRepo = new ClientRepositoryDoctrine($em);
+                $signupHanlder = new \Cantor\Domain\CommandHandler\SignUpHandler($oRepo);
+                return $signupHanlder;
+
+            },
+            'bankaccount_add_command_handler' => function($sm){
+                $em = $sm->get('doctrine.entitymanager.orm_default');
+                $oRepoClient = new ClientRepositoryDoctrine($em);
+                $oRepoAccount = new AccountRepositoryDoctrine($em);
+                $addBankAccountHandler = new \Cantor\Domain\CommandHandler\AddBankAccountHandler($oRepoAccount,$oRepoClient);
+                return $addBankAccountHandler;
+
+            }
         ),
     ),
     'translator' => array(
@@ -145,7 +163,16 @@ return array(
                              * an alias used within the service manager.
                              */
                             'alias' => 'signup_command_handler',
-                            'method' => 'execute'
+                            'method' => 'create'
+                        ),
+
+                        'Cantor\Application\Cqrs\Command\AddBankAccountCommand' => array(
+                            /*
+                             * The alias of a handler or listener should match to
+                             * an alias used within the service manager.
+                             */
+                            'alias' => 'bankaccount_add_command_handler',
+                            'method' => 'add'
                         ),
                     )
                 )

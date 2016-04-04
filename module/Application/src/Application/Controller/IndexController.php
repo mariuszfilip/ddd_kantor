@@ -9,9 +9,11 @@
 
 namespace Application\Controller;
 
+use Cantor\Application\Cqrs\Bus\DomainBus;
+use Cantor\Application\Cqrs\Command\AddBankAccountCommand;
+use Cantor\Application\Cqrs\Payload\AccountNumberRequest;
 use Cantor\Application\Cqrs\Payload\ClientRequest;
 use Cantor\Application\Cqrs\Command\SignUpCommand;
-use Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine;
 use Malocher\Cqrs\Gate;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -26,16 +28,16 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         try{
+
             $oClient = new ClientRequest();
             $oClient->setEmail('mariusz24245@gmail.com');
             $oClient->setName('Mariusz');
             $oClient->setSurname('Filipkowski');
 
-            $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-            $oRepo = new ClientRepositoryDoctrine($em);
+            $client = new SignUpCommand($oClient);
+            $this->_commandBus->getBus(DomainBus::NAME)->invokeCommand($client);
 
-            $client = new SignUpCommand($oRepo);
-            $client->execute($oClient);
+
 
         }catch(\Exception $e){
             
@@ -49,5 +51,22 @@ class IndexController extends AbstractActionController
     {
         $this->_commandBus = $get;
 
+    }
+
+
+    public function addbankaccountAction(){
+        try{
+            $oAccountRequest = new AccountNumberRequest();
+            $oAccountRequest->setCountryCode('PLN');
+            $oAccountRequest->setNumberAccount('89 8762 1022 0035 8000 3000 0010');
+            $oAccountRequest->setIdClient('009b253a-8669-4d9e-b667-7d02075c5ab8');
+
+            $bankAccountCommand = new AddBankAccountCommand($oAccountRequest);
+            $this->_commandBus->getBus(DomainBus::NAME)->invokeCommand($bankAccountCommand);
+
+        }catch (\Exception $e){
+            var_dump($e->getMessage());
+        }
+        return new ViewModel();
     }
 }

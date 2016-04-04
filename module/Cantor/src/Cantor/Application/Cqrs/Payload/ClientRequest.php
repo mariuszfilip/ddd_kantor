@@ -9,7 +9,9 @@
 namespace Cantor\Application\Cqrs\Payload;
 
 
-class ClientRequest{
+use Malocher\Cqrs\Message\PayloadInterface;
+
+class ClientRequest implements PayloadInterface{
 
     private $_email;
     private $_name;
@@ -62,7 +64,19 @@ class ClientRequest{
     {
         $this->_surname = $surname;
     }
-    
 
 
+    /**
+     * Get an array copy of the payload
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return array(
+            'name'=>$this->_name,
+            'surname'=>$this->_surname,
+            'email'=>$this->_email,
+        );
+    }
 }

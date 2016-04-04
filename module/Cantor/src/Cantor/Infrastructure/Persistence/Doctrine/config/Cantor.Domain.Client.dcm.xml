@@ -10,5 +10,6 @@
         <id name="_name" type="string" column="name"  />
         <id name="_surname" type="string" column="surname"  />
         <id name="_email" type="string" column="email"  />
+
     </entity>
 </doctrine-mapping>
