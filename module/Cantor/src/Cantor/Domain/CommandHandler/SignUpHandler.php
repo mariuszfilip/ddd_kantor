@@ -45,9 +45,8 @@ class SignUpHandler{
     {
         $clientInfo = $command->getPayload();
         $clientCheck = $this->_clientRepository->byEmail($clientInfo['email']);
-
         if($clientCheck !== null){
-            throw new ClientAlreadyExistException();
+            throw new ClientAlreadyExistException('Klient juz istnieje');
         }
 
         $client = new Client(

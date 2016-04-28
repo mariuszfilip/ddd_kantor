@@ -17,4 +17,9 @@ class ExchangeRate
     {
         return $this->_amount->getValue();
     }
+
+    public function getCurrencyCode()
+    {
+        return $this->_currency->getCode();
+    }
 }

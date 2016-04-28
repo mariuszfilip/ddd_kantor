@@ -74,7 +74,13 @@ implements Zf2AwareContextInterface
      * @var BankAccount
      */
     private $_bankAccountTransactionTarget;
+    /**
+     * @var ExchangeRate
+     */
     private $exchangeRate;
+    /**
+     * @var ExchangeSummary
+     */
     private $exchangeRateSummary;
 
     /**
@@ -209,7 +215,31 @@ implements Zf2AwareContextInterface
      */
     public function potwierdzamZlecenie()
     {
+        $this->exchangeRateSummary->confirm($this->_bankAccountTransactionSource,$this->_bankAccountTransactionTarget);
+    }
+
+    /**
+     * @Given /^wybieram numer konta "([^"]*)" oraz date od "([^"]*)"$/
+     */
+    public function wybieramNumerKontaOrazDateOd($arg1, $arg2)
+    {
         throw new PendingException();
     }
-    
+
+    /**
+     * @When /^klikam wyszukaj$/
+     */
+    public function klikamWyszukaj()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then /^widze liste wszystkich operacji na koncie$/
+     */
+    public function widzeListeWszystkichOperacjiNaKoncie(TableNode $table)
+    {
+        throw new PendingException();
+    }
+
 }

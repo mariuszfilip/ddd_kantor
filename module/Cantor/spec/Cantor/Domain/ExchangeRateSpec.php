@@ -25,4 +25,12 @@ class ExchangeRateSpec extends ObjectBehavior
 
         $this->getCourse()->shouldReturn(3.25);
     }
+
+    function it_is_get_currency_code_correct(Currency $currency, Amount $amount){
+        $currency->getCode()->willReturn('PLN');
+
+        $this->beConstructedWith($currency->getWrappedObject(),$amount->getWrappedObject());
+        $this->getCurrencyCode()->shouldReturn('PLN');
+
+    }
 }

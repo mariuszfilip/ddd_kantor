@@ -2,6 +2,7 @@
 
 namespace spec\Cantor\Domain;
 
+use Cantor\Domain\BankAccount;
 use Cantor\Domain\Exception\QuantityException;
 use Cantor\Domain\ExchangeRate;
 use PhpSpec\ObjectBehavior;
@@ -30,5 +31,12 @@ class ExchangeSummarySpec extends ObjectBehavior
 
         $this->shouldThrow(new QuantityException())->during('__construct',array($exchangeRate,0));
         $this->shouldThrow(new QuantityException())->during('__construct',array($exchangeRate,-1));
+    }
+
+    function it_is_confirm_correct_exchange(ExchangeRate $exchangeRate,BankAccount $source, BankAccount $desctionatio){
+        $this->beConstructedWith($exchangeRate->getWrappedObject(),12);
+
+        //Todo dodac in and out
+        $this->confirm($source->getWrappedObject(),$desctionatio->getWrappedObject());
     }
 }

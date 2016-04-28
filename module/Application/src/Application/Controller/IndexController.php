@@ -11,9 +11,11 @@ namespace Application\Controller;
 
 use Cantor\Application\Cqrs\Bus\DomainBus;
 use Cantor\Application\Cqrs\Command\AddBankAccountCommand;
+use Cantor\Application\Cqrs\Command\ExchangeCurrencyCommand;
 use Cantor\Application\Cqrs\Payload\AccountNumberRequest;
 use Cantor\Application\Cqrs\Payload\ClientRequest;
 use Cantor\Application\Cqrs\Command\SignUpCommand;
+use Cantor\Application\Cqrs\Payload\ExchangeCurrencyRequest;
 use Malocher\Cqrs\Gate;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -63,6 +65,25 @@ class IndexController extends AbstractActionController
 
             $bankAccountCommand = new AddBankAccountCommand($oAccountRequest);
             $this->_commandBus->getBus(DomainBus::NAME)->invokeCommand($bankAccountCommand);
+
+        }catch (\Exception $e){
+            var_dump($e->getMessage());
+        }
+        return new ViewModel();
+    }
+
+
+    public function exchangecurrencyAction(){
+        try{
+            $exchangeRequest = new ExchangeCurrencyRequest();
+            $exchangeRequest->setQuantity(10);
+            $exchangeRequest->setCurrencyCode('PLN');
+            $exchangeRequest->setIdAcccountIn('1671dd26-8b07-4bb8-a009-f80049c6368f');
+            $exchangeRequest->setIdAcccountReturn('1671dd26-8b07-4bb8-a009-f80049c6368f');
+
+
+            $exchangeCommand = new ExchangeCurrencyCommand($exchangeRequest);
+            $this->_commandBus->getBus(DomainBus::NAME)->invokeCommand($exchangeCommand);
 
         }catch (\Exception $e){
             var_dump($e->getMessage());

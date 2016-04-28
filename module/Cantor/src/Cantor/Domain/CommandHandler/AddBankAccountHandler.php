@@ -33,14 +33,11 @@ class AddBankAccountHandler{
         $aData = $accountCommand->getPayload();
 
         $client = $this->_clientRepo->byId($aData['id_client']);
-        
-        if(is_null($client)){
+        if(is_null($client) || empty($client)){
             throw new ClientNotFoundException();
         }
-        var_dump($client);
         $bankAccount = new BankAccount(new NumberAccount($aData['number']),new Currency($aData['country_code']));
         $bankAccount->setIdClient($client->getId());
-
-        //$this->_accountRepo->add($bankAccount);
+        $this->_accountRepo->add($bankAccount);
     }
 }

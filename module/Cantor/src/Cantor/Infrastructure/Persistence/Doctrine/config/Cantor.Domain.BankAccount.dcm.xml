@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Cantor\Domain\BankAccount"
+            table="bank_account"
+            repository-class="Cantor\Infrastructure\Persistence\Repository\AccountRepositoryDoctrine">
+        <id name="_id_account_number" type="string" column="id_account_number" />
+        <id name="_id_client" type="string" column="id_client"  />
+        <id name="_currency_code" type="string" column="currency_code"  />
+        <id name="_number" type="string" column="number"  />
+    </entity>
+</doctrine-mapping>

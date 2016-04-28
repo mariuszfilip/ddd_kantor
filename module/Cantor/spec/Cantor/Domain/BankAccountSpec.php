@@ -24,4 +24,10 @@ class BankAccountSpec extends ObjectBehavior
         $this->getIdClient()->shouldReturn('123123');
     }
 
+    function it_is_get_id_account(){
+        $this->setIdAccount('123123');
+
+        $this->getIdAccount()->shouldReturn('123123');
+    }
+
 }

@@ -2,7 +2,7 @@ Feature: dodanie nowego konta bankowego
   aby nie wpisywac za kazdym razem numeru konta bankowego
   chce jako klient miec mozliwosc dodawnia w systemie konta bankowego
 
-
+  @domain
   Scenario: Prawidlowe dodanie numeru konta przez klienta
    Given jestem klientem
     When  uzpelniam numer konta bankowego ,walute konta

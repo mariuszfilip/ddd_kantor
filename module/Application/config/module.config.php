@@ -11,6 +11,7 @@ namespace Application;
 
 use Cantor\Infrastructure\Persistence\Repository\AccountRepositoryDoctrine;
 use Cantor\Infrastructure\Persistence\Repository\ClientRepositoryDoctrine;
+use Cantor\Infrastructure\Persistence\Repository\ExchangeSummaryRepositoryDoctrine;
 
 return array(
     'router' => array(
@@ -81,6 +82,14 @@ return array(
                 $oRepoClient = new ClientRepositoryDoctrine($em);
                 $oRepoAccount = new AccountRepositoryDoctrine($em);
                 $addBankAccountHandler = new \Cantor\Domain\CommandHandler\AddBankAccountHandler($oRepoAccount,$oRepoClient);
+                return $addBankAccountHandler;
+
+            },
+            'exchange_currency_command_handler' => function($sm){
+                $em = $sm->get('doctrine.entitymanager.orm_default');
+                $oRepoAccount = new AccountRepositoryDoctrine($em);
+                $oRepoExchange = new ExchangeSummaryRepositoryDoctrine($em);
+                $addBankAccountHandler = new \Cantor\Domain\CommandHandler\ExchangeCurrencyHandler($oRepoAccount,$oRepoExchange);
                 return $addBankAccountHandler;
 
             }
@@ -174,6 +183,15 @@ return array(
                             'alias' => 'bankaccount_add_command_handler',
                             'method' => 'add'
                         ),
+
+                        'Cantor\Application\Cqrs\Command\ExchangeCurrencyCommand' => array(
+                            /*
+                             * The alias of a handler or listener should match to
+                             * an alias used within the service manager.
+                             */
+                            'alias' => 'exchange_currency_command_handler',
+                            'method' => 'exchange'
+                        )
                     )
                 )
             )

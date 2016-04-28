@@ -42,11 +42,11 @@ class ClientRepositoryDoctrine implements ClientRepository{
     public function byEmail($email)
     {
 
-        $dql =  $this->_entityManager->createQuery("
-          SELECT u FROM Cantor\Domain\Client u WHERE email = '.$email.'
-        ");
-
-        return $dql->getResult();
+        $dql =  $this->_entityManager->createQuery('
+          SELECT u FROM Cantor\Domain\Client u WHERE u._email = :email
+        ');
+        $dql->setParameter('email',$email);
+        return $dql->getOneOrNullResult();
     }
 
     /**
@@ -56,9 +56,9 @@ class ClientRepositoryDoctrine implements ClientRepository{
     public function byId($idClient)
     {
         $dql = $this->_entityManager->createQuery("
-          SELECT u FROM Cantor\Domain\Client u WHERE u._id = 'test'
+          SELECT u FROM Cantor\Domain\Client u WHERE u._id = :id
       ");
-
-        return $dql->getResult();
+        $dql->setParameter('id',$idClient);
+        return $dql->getOneOrNullResult();
     }
 }

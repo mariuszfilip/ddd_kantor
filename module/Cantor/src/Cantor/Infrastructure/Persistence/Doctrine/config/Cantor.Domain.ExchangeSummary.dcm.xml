@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Cantor\Domain\ExchangeSummary"
+            table="exchange_summary"
+            repository-class="Cantor\Infrastructure\Persistence\Repository\ExchangeSummaryRepositoryDoctrine">
+        <id name="_id" type="string" column="id_exchange_summary" />
+        <id name="_idAccountNumberSource" type="string" column="id_account_number_source"  />
+        <id name="_idAccountNumberTarget" type="string" column="id_account_number_target"  />
+        <id name="_quantity" type="integer" column="quantity"  />
+        <id name="_amountSummary" type="float" column="amount_summary"  />
+        <id name="_currencyCode" type="float" column="currency_code"  />
+        <id name="_course" type="float" column="course"  />
+
+    </entity>
+</doctrine-mapping>

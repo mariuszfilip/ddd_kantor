@@ -31,4 +31,17 @@ class AccountRepositoryDoctrine implements AccountRepository{
         $this->_entityManager->persist($bankAccount);
         $this->_entityManager->flush();
     }
+
+    /**
+     * @param $idAccount
+     * @return BankAccount
+     */
+    public function byId($idAccount)
+    {
+        $dql = $this->_entityManager->createQuery("
+          SELECT u FROM Cantor\Domain\BankAccount u WHERE u._id_account_number = :id
+      ");
+        $dql->setParameter('id',$idAccount);
+        return $dql->getOneOrNullResult();
+    }
 }
