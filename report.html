@@ -333,6 +333,9 @@ jako nowy klient mam mozliwosc zarejestrowania sie w portalu<br />
 </p>
 
 <div class="scenario">
+<ul class="tags">
+<li>@domain</li>
+</ul>
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="path">module/Cantor/src/Cantor/Features/add_account_client.feature:6</span>
@@ -373,6 +376,9 @@ chce jako klient miec mozliwosc dodawnia w systemie konta bankowego<br />
 </p>
 
 <div class="scenario">
+<ul class="tags">
+<li>@domain</li>
+</ul>
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">Prawidlowe dodanie numeru konta przez klienta</span>
@@ -406,17 +412,32 @@ chce jako klient miec mozliwosc dodawnia w systemie konta bankowego<br />
 <div class="feature">
 <h2>
 <span class="keyword">Feature: </span>
-<span class="title">wymiana waluty</span>
+<span class="title">w celu szybkiego podgladu wartosci dowolnej waluty</span>
 </h2>
 <p>
-jak klient chce miec mozliwosci szybkiej wymiany waluty<br />
+jako klient<br />
+chce miec kalkutalor ktory bedzie przeliczal z dowolnej waluty na inna wraz z iloscia<br />
+</p>
+
+</div>
+<div class="feature">
+<h2>
+<span class="keyword">Feature: </span>
+<span class="title">w celu szybkiej wymiany walut</span>
+</h2>
+<p>
+jako klient<br />
+chce miec mozliwosc wyboru swojego konta , wolumenu oraz potwierdzenia swojego zlecenia<br />
 </p>
 
 <div class="scenario">
+<ul class="tags">
+<li>@domain</li>
+</ul>
 <h3>
 <span class="keyword">Scenario: </span>
 <span class="title">zlecenie kupna waluty</span>
-<span class="path">module/Cantor/src/Cantor/Features/currency_conversion_client.feature:5</span>
+<span class="path">module/Cantor/src/Cantor/Features/currency_conversion_client.feature:7</span>
 </h3>
 <ol>
 <li class="passed">
@@ -468,13 +489,80 @@ jak klient chce miec mozliwosci szybkiej wymiany waluty<br />
 <span class="path">Cantor\Features\Context\FeatureContext::wyswietlaMiSiePodsumowanieZlecenia()</span>
 </div>
 </li>
-<li class="pending">
+<li class="passed">
 <div class="step">
 <span class="keyword">And </span>
 <span class="text">potwierdzam zlecenie</span>
 <span class="path">Cantor\Features\Context\FeatureContext::potwierdzamZlecenie()</span>
 </div>
-<pre class="backtrace">TODO: write pending definition</pre>
+</li>
+</ol>
+</div>
+<div class="scenario">
+<ul class="tags">
+<li>@application</li>
+</ul>
+<h3>
+<span class="keyword">Scenario: </span>
+<span class="title">zlecenie kupna waluty</span>
+<span class="path">module/Cantor/src/Cantor/Features/currency_conversion_client.feature:19</span>
+</h3>
+<ol>
+<li class="passed">
+<div class="step">
+<span class="keyword">Given </span>
+<span class="text">jestem klientem</span>
+<span class="path">Cantor\Features\Context\FeatureContext::jestemKlientem()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">When </span>
+<span class="text">wybieram walute ktora chce kupic</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wybieramWaluteKtoraChceKupic()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">And </span>
+<span class="text">wybieram wolumen waluty</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wybieramWolumenWaluty()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">And </span>
+<span class="text">wybieram konto z ktorego przelewam pln</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wybieramKontoZKtoregoPrzelewamPln()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">And </span>
+<span class="text">wybieram numer konta na ktory ma byc przelew zwrotny</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wybieramNumerKontaNaKtoryMaBycPrzelewZwrotny()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">Then </span>
+<span class="text">wyswietla mi sie kurs</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wyswietlaMiSieKurs()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">And </span>
+<span class="text">wyswietla mi sie podsumowanie zlecenia</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wyswietlaMiSiePodsumowanieZlecenia()</span>
+</div>
+</li>
+<li class="passed">
+<div class="step">
+<span class="keyword">And </span>
+<span class="text">potwierdzam zlecenie</span>
+<span class="path">Cantor\Features\Context\FeatureContext::potwierdzamZlecenie()</span>
+</div>
 </li>
 </ol>
 </div>
@@ -482,20 +570,78 @@ jak klient chce miec mozliwosci szybkiej wymiany waluty<br />
 <div class="feature">
 <h2>
 <span class="keyword">Feature: </span>
-<span class="title">jako klient mam mozliwosc przejrzenia histori operacji</span>
+<span class="title">w celu latwego przegladania histori operacji</span>
 </h2>
+<p>
+jak klient<br />
+chce posiadac zawansowana wyszukiwarka z filtrem konta bankowego oraz zakresem dat<br />
+</p>
 
+<div class="scenario">
+<ul class="tags">
+<li>@domain</li>
+</ul>
+<h3>
+<span class="keyword">Scenario: </span>
+<span class="title">wyszukania na podstawie konta bankowego i zakresu dat</span>
+<span class="path">module/Cantor/src/Cantor/Features/history_operation.feature:6</span>
+</h3>
+<ol>
+<li class="pending">
+<div class="step">
+<span class="keyword">Given </span>
+<span class="text">wybieram numer konta "<strong class="pending_param">x</strong>" oraz date od "<strong class="pending_param">2015.01.01</strong>"</span>
+<span class="path">Cantor\Features\Context\FeatureContext::wybieramNumerKontaOrazDateOd()</span>
+</div>
+<pre class="backtrace">TODO: write pending definition</pre>
+</li>
+<li class="skipped">
+<div class="step">
+<span class="keyword">When </span>
+<span class="text">klikam wyszukaj</span>
+<span class="path">Cantor\Features\Context\FeatureContext::klikamWyszukaj()</span>
+</div>
+</li>
+<li class="skipped">
+<div class="step">
+<span class="keyword">Then </span>
+<span class="text">widze liste wszystkich operacji na koncie</span>
+<span class="path">Cantor\Features\Context\FeatureContext::widzeListeWszystkichOperacjiNaKoncie()</span>
+</div>
+<table class="argument">
+<thead>
+<tr class="row">
+<td>data_operacji</td>
+<td>kwota_operacji</td>
+<td>waluta_na_ktora_wymiana</td>
+<td>numer_konta_z</td>
+<td>numer_konta_na</td>
+</tr>
+</thead>
+<tbody>
+<tr class="row">
+<td>2015-01-02</td>
+<td>3000</td>
+<td>PLN</td>
+<td>x</td>
+<td>w</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div>
 </div>
 <div class="summary passed">
 <div class="counters">
 <p class="scenarios">
-3 scenariusze (<strong class="passed">2 udane</strong>, <strong class="pending">1 oczekujący</strong>)
+5 scenariuszy (<strong class="passed">4 udane</strong>, <strong class="pending">1 oczekujący</strong>)
 </p>
 <p class="steps">
-14 kroków (<strong class="passed">13 udanych</strong>, <strong class="pending">1 oczekujący</strong>)
+25 kroków (<strong class="passed">22 udane</strong>, <strong class="skipped">2 pominięte</strong>, <strong class="pending">1 oczekujący</strong>)
 </p>
 <p class="time">
-0m0.023s
+0m0.049s
 </p>
 </div>
 <div class="switchers">

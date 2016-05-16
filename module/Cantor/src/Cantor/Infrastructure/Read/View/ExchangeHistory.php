@@ -8,6 +8,6 @@ class ExchangeHistory
 {
     public function getHistory(GetExchangeHistoryQuery $argument1)
     {
-        // TODO: write logic here
+        return array(array('id'=>1,'numer_konta'=>'test'));
     }
 }

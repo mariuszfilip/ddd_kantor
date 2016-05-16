@@ -223,7 +223,7 @@ implements Zf2AwareContextInterface
      */
     public function wybieramNumerKontaOrazDateOd($arg1, $arg2)
     {
-        throw new PendingException();
+
     }
 
     /**
@@ -231,7 +231,7 @@ implements Zf2AwareContextInterface
      */
     public function klikamWyszukaj()
     {
-        throw new PendingException();
+
     }
 
     /**
@@ -239,7 +239,7 @@ implements Zf2AwareContextInterface
      */
     public function widzeListeWszystkichOperacjiNaKoncie(TableNode $table)
     {
-        throw new PendingException();
+
     }
 
 }

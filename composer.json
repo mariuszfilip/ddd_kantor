@@ -10,13 +10,14 @@
     "require": {
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",
-        "mvlabs/zf2behat-extension" : "dev-master",
         "doctrine/doctrine-orm-module": "*",
         "phpspec/phpspec": "~2.3.0",
         "henrikbjorn/phpspec-code-coverage":"~1.0.1",
         "carlosbuenosvinos/ddd": "1.*",
         "rhumsaa/uuid": "~2.7.1",
-        "malocher/zf2-cqrs-module" : "dev-master"
+        "malocher/zf2-cqrs-module" : "dev-master",
+        "emuse/behat-html-formatter": "^0.1.0",
+        "mvlabs/zf2behat-extension" : "dev-master"
     },
     "autoload": {
         "psr-0": {
